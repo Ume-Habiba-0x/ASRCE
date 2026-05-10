@@ -11,6 +11,7 @@ def run_subfinder(domain):
             ["subfinder", "-d", domain, "-silent"],
             stderr=subprocess.DEVNULL
         ).decode().strip().splitlines()
+        output = [line for line in output if "." in line and " " not in line]  # ← add this
 
         with lock:
             results.extend(output)
@@ -21,17 +22,23 @@ def run_subfinder(domain):
 def run_amass(domain):
     try:
         output = subprocess.check_output(
-            ["amass", "enum", "-passive", "-d", domain],
-            stderr=subprocess.DEVNULL
+            ["amass", "enum", "-passive", "-d", domain, "-timeout", "1"],
+            stderr=subprocess.DEVNULL,
+            timeout=60  # kill after 60 seconds
         ).decode().strip().splitlines()
 
+        output = [line for line in output if "." in line and " " not in line]
         with lock:
             results.extend(output)
 
+    except subprocess.TimeoutExpired:
+        print("[!] Amass timed out — using subfinder results only")
     except Exception as e:
         print(f"[-] Amass error: {e}")
 
 def run_orchestrator(domain):
+    global results
+    results = []  # reset every run
     print(f"[*] Starting parallel discovery for: {domain}")
 
     # run both tools at the same time
@@ -55,3 +62,9 @@ def run_orchestrator(domain):
 
     print("[*] Saved → data/subdomains_raw.txt")
     return unique
+
+
+
+# TODO: add timeout to amass — currently blocks if slow
+# TODO: reset results list at start of each run
+# TODO: log which tool found which subdomain

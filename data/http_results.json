@@ -1,0 +1,987 @@
+[
+  {
+    "timestamp": "2026-05-10T08:04:38.274012562-04:00",
+    "port": "80",
+    "url": "http://myapps.tesla.com",
+    "input": "myapps.tesla.com",
+    "location": "https://myapps.tesla.com/",
+    "scheme": "http",
+    "webserver": "AkamaiGHost",
+    "method": "GET",
+    "host": "myapps.tesla.com",
+    "host_ip": "184.29.29.224",
+    "path": "/",
+    "time": "6.968106349s",
+    "a": [
+      "184.29.29.224"
+    ],
+    "aaaa": [
+      "2600:1417:7a:584::700",
+      "2600:1417:7a:587::700"
+    ],
+    "cname": [
+      "myapps.tesla.com.edgekey.net",
+      "e1792.dscx.akamaiedge.net"
+    ],
+    "words": 0,
+    "lines": 0,
+    "status_code": 301,
+    "content_length": 0,
+    "failed": false,
+    "knowledgebase": {
+      "pHash": 0
+    },
+    "resolvers": [
+      "1.1.1.1:53"
+    ]
+  },
+  {
+    "timestamp": "2026-05-10T08:04:46.815106832-04:00",
+    "tls": {
+      "host": "onboard.tesla.com",
+      "port": "443",
+      "probe_status": true,
+      "tls_version": "tls13",
+      "cipher": "TLS_AES_256_GCM_SHA384",
+      "not_before": "2025-11-15T00:00:00Z",
+      "not_after": "2026-11-17T23:59:59Z",
+      "subject_dn": "CN=*.tesla.com, O=TESLA\\, INC., L=Austin, ST=Texas, C=US",
+      "subject_cn": "*.tesla.com",
+      "subject_org": [
+        "TESLA, INC."
+      ],
+      "subject_an": [
+        "*.tesla.com",
+        "tesla.com"
+      ],
+      "serial": "0F:2E:92:AD:C3:6E:C5:36:25:D6:60:EC:77:4B:EC:67",
+      "issuer_dn": "CN=GeoTrust TLS RSA CA G1, OU=www.digicert.com, O=DigiCert Inc, C=US",
+      "issuer_cn": "GeoTrust TLS RSA CA G1",
+      "issuer_org": [
+        "DigiCert Inc"
+      ],
+      "fingerprint_hash": {
+        "md5": "3855f61ec3a0dbae33ad52306c788df7",
+        "sha1": "1066064ebb69256d3f7e808eb15436a9b67f000d",
+        "sha256": "7ae8f7567701c03eaa18d6ffd373cc9a39c341373a549183a61a4a9bf616bb82"
+      },
+      "wildcard_certificate": true,
+      "tls_connection": "ctls",
+      "sni": "onboard.tesla.com"
+    },
+    "port": "443",
+    "url": "https://onboard.tesla.com",
+    "input": "onboard.tesla.com",
+    "title": "Access Denied",
+    "scheme": "https",
+    "webserver": "AkamaiGHost",
+    "content_type": "text/html",
+    "method": "GET",
+    "host": "onboard.tesla.com",
+    "host_ip": "184.29.29.224",
+    "path": "/",
+    "time": "8.183517046s",
+    "a": [
+      "184.29.29.224"
+    ],
+    "aaaa": [
+      "2600:1417:7a:587::700",
+      "2600:1417:7a:584::700"
+    ],
+    "cname": [
+      "inside.tesla.com.edgekey.net",
+      "e1792.dscx.akamaiedge.net"
+    ],
+    "tech": [
+      "HSTS"
+    ],
+    "words": 13,
+    "lines": 10,
+    "status_code": 403,
+    "content_length": 371,
+    "failed": false,
+    "knowledgebase": {
+      "pHash": 0
+    },
+    "resolvers": [
+      "1.0.0.1:53",
+      "8.8.8.8:53"
+    ]
+  },
+  {
+    "timestamp": "2026-05-10T08:04:49.405788241-04:00",
+    "port": "80",
+    "url": "http://origin-assets-contactus.tesla.com",
+    "input": "origin-assets-contactus.tesla.com",
+    "title": "Access Denied",
+    "scheme": "http",
+    "webserver": "AkamaiGHost",
+    "content_type": "text/html",
+    "method": "GET",
+    "host": "origin-assets-contactus.tesla.com",
+    "host_ip": "184.29.29.224",
+    "path": "/",
+    "time": "172.982124ms",
+    "a": [
+      "184.29.29.224"
+    ],
+    "aaaa": [
+      "2600:1417:7a:587::700",
+      "2600:1417:7a:584::700"
+    ],
+    "cname": [
+      "origin-assets-contactus.tesla.com.edgekey.net",
+      "e1792.dscx.akamaiedge.net"
+    ],
+    "words": 13,
+    "lines": 10,
+    "status_code": 403,
+    "content_length": 395,
+    "failed": false,
+    "knowledgebase": {
+      "pHash": 0
+    },
+    "resolvers": [
+      "1.1.1.1:53",
+      "8.8.8.8:53"
+    ]
+  },
+  {
+    "timestamp": "2026-05-10T08:04:53.74519106-04:00",
+    "tls": {
+      "host": "partners.tesla.com",
+      "port": "443",
+      "probe_status": true,
+      "tls_version": "tls13",
+      "cipher": "TLS_AES_256_GCM_SHA384",
+      "not_before": "2025-11-15T00:00:00Z",
+      "not_after": "2026-11-17T23:59:59Z",
+      "subject_dn": "CN=*.tesla.com, O=TESLA\\, INC., L=Austin, ST=Texas, C=US",
+      "subject_cn": "*.tesla.com",
+      "subject_org": [
+        "TESLA, INC."
+      ],
+      "subject_an": [
+        "*.tesla.com",
+        "tesla.com"
+      ],
+      "serial": "0F:2E:92:AD:C3:6E:C5:36:25:D6:60:EC:77:4B:EC:67",
+      "issuer_dn": "CN=GeoTrust TLS RSA CA G1, OU=www.digicert.com, O=DigiCert Inc, C=US",
+      "issuer_cn": "GeoTrust TLS RSA CA G1",
+      "issuer_org": [
+        "DigiCert Inc"
+      ],
+      "fingerprint_hash": {
+        "md5": "3855f61ec3a0dbae33ad52306c788df7",
+        "sha1": "1066064ebb69256d3f7e808eb15436a9b67f000d",
+        "sha256": "7ae8f7567701c03eaa18d6ffd373cc9a39c341373a549183a61a4a9bf616bb82"
+      },
+      "wildcard_certificate": true,
+      "tls_connection": "ctls",
+      "sni": "partners.tesla.com"
+    },
+    "port": "443",
+    "url": "https://partners.tesla.com",
+    "input": "partners.tesla.com",
+    "title": "Access Denied",
+    "scheme": "https",
+    "webserver": "AkamaiGHost",
+    "content_type": "text/html",
+    "method": "GET",
+    "host": "partners.tesla.com",
+    "host_ip": "184.29.29.224",
+    "path": "/",
+    "time": "1.140602376s",
+    "a": [
+      "184.29.29.224"
+    ],
+    "aaaa": [
+      "2600:1417:7a:587::700",
+      "2600:1417:7a:584::700"
+    ],
+    "cname": [
+      "partners.tesla.com.edgekey.net",
+      "e1792.dscx.akamaiedge.net"
+    ],
+    "tech": [
+      "HSTS"
+    ],
+    "words": 13,
+    "lines": 10,
+    "status_code": 403,
+    "content_length": 372,
+    "failed": false,
+    "knowledgebase": {
+      "pHash": 0
+    },
+    "resolvers": [
+      "8.8.8.8:53",
+      "8.8.4.4:53"
+    ]
+  },
+  {
+    "timestamp": "2026-05-10T08:04:53.747209594-04:00",
+    "tls": {
+      "host": "ownerapi-api.eng.euw1.vn.cloud.tesla.com",
+      "port": "443",
+      "probe_status": true,
+      "tls_version": "tls13",
+      "cipher": "TLS_AES_128_GCM_SHA256",
+      "not_before": "2026-04-21T00:00:00Z",
+      "not_after": "2026-05-20T23:59:59Z",
+      "subject_dn": "CN=ownerapi-api.eng.euw1.vn.cloud.tesla.com, O=Tesla\\, Inc., L=Palo Alto, ST=California, C=US",
+      "subject_cn": "ownerapi-api.eng.euw1.vn.cloud.tesla.com",
+      "subject_org": [
+        "Tesla, Inc."
+      ],
+      "subject_an": [
+        "ownerapi-api.eng.euw1.vn.cloud.tesla.com"
+      ],
+      "serial": "01:9A:BE:DD:A4:1D:97:0B:54:39:34:06:89:A8:C3:64",
+      "issuer_dn": "CN=DigiCert Global G2 TLS RSA SHA256 2020 CA1, O=DigiCert Inc, C=US",
+      "issuer_cn": "DigiCert Global G2 TLS RSA SHA256 2020 CA1",
+      "issuer_org": [
+        "DigiCert Inc"
+      ],
+      "fingerprint_hash": {
+        "md5": "4b6a7a4351ff2624c7b0db8d0356b52f",
+        "sha1": "b34d0c0e0a79e68c8c8d919278cb2822a539b5cc",
+        "sha256": "4eada5b89df1a0f49205a4971ffa16bca6644b23d7d701e4b21c3a9081ca9f02"
+      },
+      "tls_connection": "ctls",
+      "sni": "ownerapi-api.eng.euw1.vn.cloud.tesla.com"
+    },
+    "cdn_name": "aws",
+    "cdn_type": "cloud",
+    "port": "443",
+    "url": "https://ownerapi-api.eng.euw1.vn.cloud.tesla.com",
+    "input": "ownerapi-api.eng.euw1.vn.cloud.tesla.com",
+    "scheme": "https",
+    "webserver": "envoy",
+    "method": "GET",
+    "host": "ownerapi-api.eng.euw1.vn.cloud.tesla.com",
+    "host_ip": "52.211.120.0",
+    "path": "/",
+    "time": "5.651540786s",
+    "a": [
+      "52.211.120.0"
+    ],
+    "cname": [
+      "epuca-eng.euw1.vn.cloud.tesla.com",
+      "epuca-eng-c-73b212a585d4232c.elb.eu-west-1.amazonaws.com"
+    ],
+    "tech": [
+      "Envoy",
+      "HSTS"
+    ],
+    "words": 3,
+    "lines": 1,
+    "status_code": 404,
+    "content_length": 14,
+    "failed": false,
+    "knowledgebase": {
+      "pHash": 0
+    },
+    "resolvers": [
+      "8.8.4.4:53",
+      "1.1.1.1:53"
+    ]
+  },
+  {
+    "timestamp": "2026-05-10T08:04:53.75276773-04:00",
+    "tls": {
+      "host": "pay.tesla.com",
+      "port": "443",
+      "probe_status": true,
+      "tls_version": "tls13",
+      "cipher": "TLS_AES_256_GCM_SHA384",
+      "not_before": "2025-11-15T00:00:00Z",
+      "not_after": "2026-11-17T23:59:59Z",
+      "subject_dn": "CN=*.tesla.com, O=TESLA\\, INC., L=Austin, ST=Texas, C=US",
+      "subject_cn": "*.tesla.com",
+      "subject_org": [
+        "TESLA, INC."
+      ],
+      "subject_an": [
+        "*.tesla.com",
+        "tesla.com"
+      ],
+      "serial": "0F:2E:92:AD:C3:6E:C5:36:25:D6:60:EC:77:4B:EC:67",
+      "issuer_dn": "CN=GeoTrust TLS RSA CA G1, OU=www.digicert.com, O=DigiCert Inc, C=US",
+      "issuer_cn": "GeoTrust TLS RSA CA G1",
+      "issuer_org": [
+        "DigiCert Inc"
+      ],
+      "fingerprint_hash": {
+        "md5": "3855f61ec3a0dbae33ad52306c788df7",
+        "sha1": "1066064ebb69256d3f7e808eb15436a9b67f000d",
+        "sha256": "7ae8f7567701c03eaa18d6ffd373cc9a39c341373a549183a61a4a9bf616bb82"
+      },
+      "wildcard_certificate": true,
+      "tls_connection": "ctls",
+      "sni": "pay.tesla.com"
+    },
+    "port": "443",
+    "url": "https://pay.tesla.com",
+    "input": "pay.tesla.com",
+    "title": "Access Denied",
+    "scheme": "https",
+    "webserver": "AkamaiGHost",
+    "content_type": "text/html",
+    "method": "GET",
+    "host": "pay.tesla.com",
+    "host_ip": "184.29.29.224",
+    "path": "/",
+    "time": "1.112645097s",
+    "a": [
+      "184.29.29.224"
+    ],
+    "aaaa": [
+      "2600:1417:7a:584::700",
+      "2600:1417:7a:587::700"
+    ],
+    "cname": [
+      "static-assets-pay.tesla.com-v1.edgekey.net",
+      "e1792.dscx.akamaiedge.net"
+    ],
+    "tech": [
+      "HSTS"
+    ],
+    "words": 13,
+    "lines": 10,
+    "status_code": 403,
+    "content_length": 367,
+    "failed": false,
+    "knowledgebase": {
+      "pHash": 0
+    },
+    "resolvers": [
+      "8.8.8.8:53",
+      "1.1.1.1:53"
+    ]
+  },
+  {
+    "timestamp": "2026-05-10T08:04:53.874125304-04:00",
+    "tls": {
+      "host": "ownerapi-api.eng.usw.vn.cloud.tesla.com",
+      "port": "443",
+      "probe_status": true,
+      "tls_version": "tls13",
+      "cipher": "TLS_AES_128_GCM_SHA256",
+      "not_before": "2026-04-21T00:00:00Z",
+      "not_after": "2026-05-20T23:59:59Z",
+      "subject_dn": "CN=ownerapi-api.eng.usw.vn.cloud.tesla.com, O=Tesla\\, Inc., L=Palo Alto, ST=California, C=US",
+      "subject_cn": "ownerapi-api.eng.usw.vn.cloud.tesla.com",
+      "subject_org": [
+        "Tesla, Inc."
+      ],
+      "subject_an": [
+        "ownerapi-api.eng.usw.vn.cloud.tesla.com"
+      ],
+      "serial": "04:99:0E:92:7B:FD:2F:10:5D:0E:34:C8:6D:2E:03:D5",
+      "issuer_dn": "CN=DigiCert Global G2 TLS RSA SHA256 2020 CA1, O=DigiCert Inc, C=US",
+      "issuer_cn": "DigiCert Global G2 TLS RSA SHA256 2020 CA1",
+      "issuer_org": [
+        "DigiCert Inc"
+      ],
+      "fingerprint_hash": {
+        "md5": "76baeb4a6f79f202b67e2c112578668b",
+        "sha1": "de9d608a3ffd64548408e9440e27c75bdc9adbb8",
+        "sha256": "82c224098f5bd38384769f6ddbdfcd4482955962c16a2f3bcdcedd0f0235841e"
+      },
+      "tls_connection": "ctls",
+      "sni": "ownerapi-api.eng.usw.vn.cloud.tesla.com"
+    },
+    "port": "443",
+    "url": "https://ownerapi-api.eng.usw.vn.cloud.tesla.com",
+    "input": "ownerapi-api.eng.usw.vn.cloud.tesla.com",
+    "scheme": "https",
+    "webserver": "envoy",
+    "method": "GET",
+    "host": "ownerapi-api.eng.usw.vn.cloud.tesla.com",
+    "host_ip": "66.17.6.10",
+    "path": "/",
+    "time": "5.750837599s",
+    "a": [
+      "66.17.6.10"
+    ],
+    "cname": [
+      "epuca-eng.usw.vn.cloud.tesla.com",
+      "usw-eng5b-fleet-epuca-prd.teslafleet.akadns.net"
+    ],
+    "tech": [
+      "Envoy",
+      "HSTS"
+    ],
+    "words": 3,
+    "lines": 1,
+    "status_code": 404,
+    "content_length": 14,
+    "failed": false,
+    "knowledgebase": {
+      "pHash": 0
+    },
+    "resolvers": [
+      "8.8.4.4:53",
+      "1.0.0.1:53"
+    ]
+  },
+  {
+    "timestamp": "2026-05-10T08:04:54.960835605-04:00",
+    "tls": {
+      "host": "oxp-charging-guest-web.tesla.com",
+      "port": "443",
+      "probe_status": true,
+      "tls_version": "tls13",
+      "cipher": "TLS_AES_256_GCM_SHA384",
+      "not_before": "2025-11-15T00:00:00Z",
+      "not_after": "2026-11-17T23:59:59Z",
+      "subject_dn": "CN=*.tesla.com, O=TESLA\\, INC., L=Austin, ST=Texas, C=US",
+      "subject_cn": "*.tesla.com",
+      "subject_org": [
+        "TESLA, INC."
+      ],
+      "subject_an": [
+        "*.tesla.com",
+        "tesla.com"
+      ],
+      "serial": "0F:2E:92:AD:C3:6E:C5:36:25:D6:60:EC:77:4B:EC:67",
+      "issuer_dn": "CN=GeoTrust TLS RSA CA G1, OU=www.digicert.com, O=DigiCert Inc, C=US",
+      "issuer_cn": "GeoTrust TLS RSA CA G1",
+      "issuer_org": [
+        "DigiCert Inc"
+      ],
+      "fingerprint_hash": {
+        "md5": "3855f61ec3a0dbae33ad52306c788df7",
+        "sha1": "1066064ebb69256d3f7e808eb15436a9b67f000d",
+        "sha256": "7ae8f7567701c03eaa18d6ffd373cc9a39c341373a549183a61a4a9bf616bb82"
+      },
+      "wildcard_certificate": true,
+      "tls_connection": "ctls",
+      "sni": "oxp-charging-guest-web.tesla.com"
+    },
+    "port": "443",
+    "url": "https://oxp-charging-guest-web.tesla.com",
+    "input": "oxp-charging-guest-web.tesla.com",
+    "title": "Access Denied",
+    "scheme": "https",
+    "webserver": "AkamaiGHost",
+    "content_type": "text/html",
+    "method": "GET",
+    "host": "oxp-charging-guest-web.tesla.com",
+    "host_ip": "184.29.29.224",
+    "path": "/",
+    "time": "5.763324574s",
+    "a": [
+      "184.29.29.224"
+    ],
+    "aaaa": [
+      "2600:1417:7a:587::700",
+      "2600:1417:7a:584::700"
+    ],
+    "cname": [
+      "external-na-pop1.edgekey.net",
+      "e1792.dscx.akamaiedge.net"
+    ],
+    "tech": [
+      "HSTS"
+    ],
+    "words": 13,
+    "lines": 10,
+    "status_code": 403,
+    "content_length": 398,
+    "failed": false,
+    "knowledgebase": {
+      "pHash": 0
+    },
+    "resolvers": [
+      "8.8.4.4:53",
+      "1.0.0.1:53"
+    ]
+  },
+  {
+    "timestamp": "2026-05-10T08:04:55.00776734-04:00",
+    "tls": {
+      "host": "ownerapi-alpha.prd.vn.cloud.tesla.com",
+      "port": "443",
+      "probe_status": true,
+      "tls_version": "tls13",
+      "cipher": "TLS_AES_128_GCM_SHA256",
+      "not_before": "2026-04-26T00:00:00Z",
+      "not_after": "2026-05-25T23:59:59Z",
+      "subject_dn": "CN=ownerapi-alpha.prd.vn.cloud.tesla.com, O=Tesla\\, Inc., L=Palo Alto, ST=California, C=US",
+      "subject_cn": "ownerapi-alpha.prd.vn.cloud.tesla.com",
+      "subject_org": [
+        "Tesla, Inc."
+      ],
+      "subject_an": [
+        "ownerapi-alpha.prd.vn.cloud.tesla.com"
+      ],
+      "serial": "0B:A9:66:69:F4:7E:35:DC:21:07:4F:B1:22:8C:E6:70",
+      "issuer_dn": "CN=DigiCert Global G2 TLS RSA SHA256 2020 CA1, O=DigiCert Inc, C=US",
+      "issuer_cn": "DigiCert Global G2 TLS RSA SHA256 2020 CA1",
+      "issuer_org": [
+        "DigiCert Inc"
+      ],
+      "fingerprint_hash": {
+        "md5": "9075399e8c31fa7efb464a7ef9ce668a",
+        "sha1": "a642bbe23e8c1670e03a70d60440a727386de855",
+        "sha256": "4cb550413b19358b0e5a00ca3a1c1811612e827372fdc45e13c187b3a6fe6e2f"
+      },
+      "tls_connection": "ctls",
+      "sni": "ownerapi-alpha.prd.vn.cloud.tesla.com"
+    },
+    "port": "443",
+    "url": "https://ownerapi-alpha.prd.vn.cloud.tesla.com",
+    "input": "ownerapi-alpha.prd.vn.cloud.tesla.com",
+    "scheme": "https",
+    "webserver": "envoy",
+    "method": "GET",
+    "host": "ownerapi-alpha.prd.vn.cloud.tesla.com",
+    "host_ip": "66.17.8.10",
+    "path": "/",
+    "time": "6.923284661s",
+    "a": [
+      "66.17.8.10"
+    ],
+    "cname": [
+      "epuca-eng.usw.vn.cloud.tesla.com",
+      "usw-eng5b-fleet-epuca-prd.teslafleet.akadns.net"
+    ],
+    "tech": [
+      "Envoy",
+      "HSTS"
+    ],
+    "words": 3,
+    "lines": 1,
+    "status_code": 404,
+    "content_length": 14,
+    "failed": false,
+    "knowledgebase": {
+      "pHash": 0
+    },
+    "resolvers": [
+      "1.1.1.1:53",
+      "1.0.0.1:53"
+    ]
+  },
+  {
+    "timestamp": "2026-05-10T08:04:55.759917523-04:00",
+    "tls": {
+      "host": "pages.emails.tesla.com",
+      "port": "443",
+      "probe_status": true,
+      "tls_version": "tls12",
+      "cipher": "TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384",
+      "mismatched": true,
+      "not_before": "2026-01-06T00:00:00Z",
+      "not_after": "2027-02-06T23:59:59Z",
+      "subject_dn": "CN=pages.s10.exacttarget.com, O=Salesforce\\, Inc., L=San Francisco, ST=California, C=US",
+      "subject_cn": "pages.s10.exacttarget.com",
+      "subject_org": [
+        "Salesforce, Inc."
+      ],
+      "subject_an": [
+        "pages.s10.exacttarget.com"
+      ],
+      "serial": "05:D7:16:8B:39:21:7D:5B:81:21:EF:FA:14:28:2F:7E",
+      "issuer_dn": "CN=DigiCert Global G2 TLS RSA SHA256 2020 CA1, O=DigiCert Inc, C=US",
+      "issuer_cn": "DigiCert Global G2 TLS RSA SHA256 2020 CA1",
+      "issuer_org": [
+        "DigiCert Inc"
+      ],
+      "fingerprint_hash": {
+        "md5": "37b74cadd4da79a553b8ff88a1543699",
+        "sha1": "c0da5ca793fd6b9e8de601a4d12484fdb98aeaa8",
+        "sha256": "e36febc726ec5153b2aeb168c50175c85a62a197dd0be00b4b9e1bb98fe06fae"
+      },
+      "tls_connection": "ctls",
+      "sni": "pages.emails.tesla.com"
+    },
+    "port": "443",
+    "url": "https://pages.emails.tesla.com",
+    "input": "pages.emails.tesla.com",
+    "title": "403 - Forbidden: Access is denied.",
+    "scheme": "https",
+    "content_type": "text/html",
+    "method": "GET",
+    "host": "pages.emails.tesla.com",
+    "host_ip": "13.111.18.25",
+    "path": "/",
+    "time": "6.531736421s",
+    "a": [
+      "13.111.18.25"
+    ],
+    "cname": [
+      "pages.virt.s10.exacttarget.com"
+    ],
+    "words": 73,
+    "lines": 29,
+    "status_code": 403,
+    "content_length": 1233,
+    "failed": false,
+    "knowledgebase": {
+      "pHash": 0
+    },
+    "resolvers": [
+      "1.0.0.1:53",
+      "8.8.8.8:53"
+    ]
+  },
+  {
+    "timestamp": "2026-05-10T08:04:59.877870789-04:00",
+    "port": "80",
+    "url": "http://pages.email.tesla.com",
+    "input": "pages.email.tesla.com",
+    "title": "403 - Forbidden: Access is denied.",
+    "scheme": "http",
+    "content_type": "text/html",
+    "method": "GET",
+    "host": "pages.email.tesla.com",
+    "host_ip": "136.147.129.25",
+    "path": "/",
+    "time": "627.302343ms",
+    "a": [
+      "136.147.129.25"
+    ],
+    "cname": [
+      "pages.virt.s7.exacttarget.com"
+    ],
+    "words": 73,
+    "lines": 29,
+    "status_code": 403,
+    "content_length": 1233,
+    "failed": false,
+    "knowledgebase": {
+      "pHash": 0
+    },
+    "resolvers": [
+      "1.0.0.1:53",
+      "1.1.1.1:53"
+    ]
+  },
+  {
+    "timestamp": "2026-05-10T08:05:06.195090684-04:00",
+    "port": "80",
+    "url": "http://ownership.tesla.com",
+    "input": "ownership.tesla.com",
+    "location": "https://ownership.tesla.com/",
+    "scheme": "http",
+    "webserver": "AkamaiGHost",
+    "method": "GET",
+    "host": "ownership.tesla.com",
+    "host_ip": "184.29.29.224",
+    "path": "/",
+    "time": "7.08886355s",
+    "a": [
+      "184.29.29.224"
+    ],
+    "aaaa": [
+      "2600:1417:7a:584::700",
+      "2600:1417:7a:587::700"
+    ],
+    "cname": [
+      "ownership.tesla.com.edgekey.net",
+      "e1792.dscx.akamaiedge.net"
+    ],
+    "words": 0,
+    "lines": 0,
+    "status_code": 301,
+    "content_length": 0,
+    "failed": false,
+    "knowledgebase": {
+      "pHash": 0
+    },
+    "resolvers": [
+      "1.0.0.1:53",
+      "8.8.4.4:53"
+    ]
+  },
+  {
+    "timestamp": "2026-05-10T08:05:14.543178555-04:00",
+    "port": "80",
+    "url": "http://ranger-api.tesla.com",
+    "input": "ranger-api.tesla.com",
+    "location": "https://ranger-api.tesla.com/",
+    "scheme": "http",
+    "webserver": "AkamaiGHost",
+    "method": "GET",
+    "host": "ranger-api.tesla.com",
+    "host_ip": "184.29.29.224",
+    "path": "/",
+    "time": "222.487924ms",
+    "a": [
+      "184.29.29.224"
+    ],
+    "aaaa": [
+      "2600:1417:7a:584::700",
+      "2600:1417:7a:587::700"
+    ],
+    "cname": [
+      "external-na-pop1.edgekey.net",
+      "e1792.dscx.akamaiedge.net"
+    ],
+    "words": 0,
+    "lines": 0,
+    "status_code": 301,
+    "content_length": 0,
+    "failed": false,
+    "knowledgebase": {
+      "pHash": 0
+    },
+    "resolvers": [
+      "8.8.8.8:53",
+      "1.1.1.1:53"
+    ]
+  },
+  {
+    "timestamp": "2026-05-10T08:05:16.678540209-04:00",
+    "tls": {
+      "host": "schedule.tesla.com",
+      "port": "443",
+      "probe_status": true,
+      "tls_version": "tls13",
+      "cipher": "TLS_AES_256_GCM_SHA384",
+      "not_before": "2025-11-15T00:00:00Z",
+      "not_after": "2026-11-17T23:59:59Z",
+      "subject_dn": "CN=*.tesla.com, O=TESLA\\, INC., L=Austin, ST=Texas, C=US",
+      "subject_cn": "*.tesla.com",
+      "subject_org": [
+        "TESLA, INC."
+      ],
+      "subject_an": [
+        "*.tesla.com",
+        "tesla.com"
+      ],
+      "serial": "0F:2E:92:AD:C3:6E:C5:36:25:D6:60:EC:77:4B:EC:67",
+      "issuer_dn": "CN=GeoTrust TLS RSA CA G1, OU=www.digicert.com, O=DigiCert Inc, C=US",
+      "issuer_cn": "GeoTrust TLS RSA CA G1",
+      "issuer_org": [
+        "DigiCert Inc"
+      ],
+      "fingerprint_hash": {
+        "md5": "3855f61ec3a0dbae33ad52306c788df7",
+        "sha1": "1066064ebb69256d3f7e808eb15436a9b67f000d",
+        "sha256": "7ae8f7567701c03eaa18d6ffd373cc9a39c341373a549183a61a4a9bf616bb82"
+      },
+      "wildcard_certificate": true,
+      "tls_connection": "ctls",
+      "sni": "schedule.tesla.com"
+    },
+    "port": "443",
+    "url": "https://schedule.tesla.com",
+    "input": "schedule.tesla.com",
+    "title": "Access Denied",
+    "scheme": "https",
+    "webserver": "AkamaiGHost",
+    "content_type": "text/html",
+    "method": "GET",
+    "host": "schedule.tesla.com",
+    "host_ip": "184.29.29.224",
+    "path": "/",
+    "time": "2.129062244s",
+    "a": [
+      "184.29.29.224"
+    ],
+    "aaaa": [
+      "2600:1417:7a:587::700",
+      "2600:1417:7a:584::700"
+    ],
+    "cname": [
+      "schedule.tesla.com.edgekey.net",
+      "e1792.dscx.akamaiedge.net"
+    ],
+    "words": 13,
+    "lines": 10,
+    "status_code": 403,
+    "content_length": 372,
+    "failed": false,
+    "knowledgebase": {
+      "pHash": 0
+    },
+    "resolvers": [
+      "1.1.1.1:53",
+      "8.8.8.8:53"
+    ]
+  },
+  {
+    "timestamp": "2026-05-10T08:05:24.678333283-04:00",
+    "port": "80",
+    "url": "http://secure-static-assets.tesla.com",
+    "input": "secure-static-assets.tesla.com",
+    "title": "Access Denied",
+    "scheme": "http",
+    "webserver": "AkamaiGHost",
+    "content_type": "text/html",
+    "method": "GET",
+    "host": "secure-static-assets.tesla.com",
+    "host_ip": "184.29.29.224",
+    "path": "/",
+    "time": "5.073925545s",
+    "a": [
+      "184.29.29.224"
+    ],
+    "aaaa": [
+      "2600:1417:7a:587::700",
+      "2600:1417:7a:584::700"
+    ],
+    "cname": [
+      "secure-static-assets.tesla.com.edgekey.net",
+      "e1792.dscx.akamaiedge.net"
+    ],
+    "words": 13,
+    "lines": 10,
+    "status_code": 403,
+    "content_length": 392,
+    "failed": false,
+    "knowledgebase": {
+      "pHash": 0
+    },
+    "resolvers": [
+      "8.8.4.4:53",
+      "8.8.8.8:53"
+    ]
+  },
+  {
+    "timestamp": "2026-05-10T08:05:30.944146225-04:00",
+    "tls": {
+      "host": "static-map.tesla.com",
+      "port": "443",
+      "probe_status": true,
+      "tls_version": "tls13",
+      "cipher": "TLS_AES_256_GCM_SHA384",
+      "not_before": "2025-11-15T00:00:00Z",
+      "not_after": "2026-11-17T23:59:59Z",
+      "subject_dn": "CN=*.tesla.com, O=TESLA\\, INC., L=Austin, ST=Texas, C=US",
+      "subject_cn": "*.tesla.com",
+      "subject_org": [
+        "TESLA, INC."
+      ],
+      "subject_an": [
+        "*.tesla.com",
+        "tesla.com"
+      ],
+      "serial": "0F:2E:92:AD:C3:6E:C5:36:25:D6:60:EC:77:4B:EC:67",
+      "issuer_dn": "CN=GeoTrust TLS RSA CA G1, OU=www.digicert.com, O=DigiCert Inc, C=US",
+      "issuer_cn": "GeoTrust TLS RSA CA G1",
+      "issuer_org": [
+        "DigiCert Inc"
+      ],
+      "fingerprint_hash": {
+        "md5": "3855f61ec3a0dbae33ad52306c788df7",
+        "sha1": "1066064ebb69256d3f7e808eb15436a9b67f000d",
+        "sha256": "7ae8f7567701c03eaa18d6ffd373cc9a39c341373a549183a61a4a9bf616bb82"
+      },
+      "wildcard_certificate": true,
+      "tls_connection": "ctls",
+      "sni": "static-map.tesla.com"
+    },
+    "port": "443",
+    "url": "https://static-map.tesla.com",
+    "input": "static-map.tesla.com",
+    "title": "Access Denied",
+    "scheme": "https",
+    "webserver": "AkamaiGHost",
+    "content_type": "text/html",
+    "method": "GET",
+    "host": "static-map.tesla.com",
+    "host_ip": "184.29.29.224",
+    "path": "/",
+    "time": "2.980696134s",
+    "a": [
+      "184.29.29.224"
+    ],
+    "aaaa": [
+      "2600:1417:7a:587::700",
+      "2600:1417:7a:584::700"
+    ],
+    "cname": [
+      "static-map-626194.edgekey.net",
+      "e1792.dscx.akamaiedge.net"
+    ],
+    "words": 13,
+    "lines": 10,
+    "status_code": 403,
+    "content_length": 378,
+    "failed": false,
+    "knowledgebase": {
+      "pHash": 0
+    },
+    "resolvers": [
+      "8.8.4.4:53"
+    ]
+  },
+  {
+    "timestamp": "2026-05-10T08:05:31.176712927-04:00",
+    "tls": {
+      "host": "sso-dev.tesla.com",
+      "port": "443",
+      "probe_status": true,
+      "tls_version": "tls13",
+      "cipher": "TLS_AES_256_GCM_SHA384",
+      "not_before": "2025-11-15T00:00:00Z",
+      "not_after": "2026-11-17T23:59:59Z",
+      "subject_dn": "CN=*.tesla.com, O=TESLA\\, INC., L=Austin, ST=Texas, C=US",
+      "subject_cn": "*.tesla.com",
+      "subject_org": [
+        "TESLA, INC."
+      ],
+      "subject_an": [
+        "*.tesla.com",
+        "tesla.com"
+      ],
+      "serial": "0F:2E:92:AD:C3:6E:C5:36:25:D6:60:EC:77:4B:EC:67",
+      "issuer_dn": "CN=GeoTrust TLS RSA CA G1, OU=www.digicert.com, O=DigiCert Inc, C=US",
+      "issuer_cn": "GeoTrust TLS RSA CA G1",
+      "issuer_org": [
+        "DigiCert Inc"
+      ],
+      "fingerprint_hash": {
+        "md5": "3855f61ec3a0dbae33ad52306c788df7",
+        "sha1": "1066064ebb69256d3f7e808eb15436a9b67f000d",
+        "sha256": "7ae8f7567701c03eaa18d6ffd373cc9a39c341373a549183a61a4a9bf616bb82"
+      },
+      "wildcard_certificate": true,
+      "tls_connection": "ctls",
+      "sni": "sso-dev.tesla.com"
+    },
+    "port": "443",
+    "url": "https://sso-dev.tesla.com",
+    "input": "sso-dev.tesla.com",
+    "title": "Access Denied",
+    "scheme": "https",
+    "webserver": "AkamaiGHost",
+    "content_type": "text/html",
+    "method": "GET",
+    "host": "sso-dev.tesla.com",
+    "host_ip": "184.29.29.224",
+    "path": "/",
+    "time": "7.112290369s",
+    "a": [
+      "184.29.29.224"
+    ],
+    "aaaa": [
+      "2600:1417:7a:587::700",
+      "2600:1417:7a:584::700"
+    ],
+    "cname": [
+      "sso-dev.edgekey.net",
+      "e1792.dscx.akamaiedge.net"
+    ],
+    "tech": [
+      "HSTS"
+    ],
+    "words": 13,
+    "lines": 10,
+    "status_code": 403,
+    "content_length": 375,
+    "failed": false,
+    "knowledgebase": {
+      "pHash": 0
+    },
+    "resolvers": [
+      "8.8.8.8:53",
+      "1.1.1.1:53"
+    ]
+  }
+]

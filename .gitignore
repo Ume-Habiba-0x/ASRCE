@@ -1,0 +1,9 @@
+cat > .gitignore << EOF
+output/*.txt
+output/*.json
+data/subdomains_raw.txt
+data/bruteforce_subdomain.txt
+__pycache__/
+*.pyc
+.env
+EOF
