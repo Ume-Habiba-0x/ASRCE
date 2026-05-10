@@ -1,0 +1,57 @@
+import subprocess
+import threading
+
+# ── Output storage ──
+results = []
+lock = threading.Lock()
+
+def run_subfinder(domain):
+    try:
+        output = subprocess.check_output(
+            ["subfinder", "-d", domain, "-silent"],
+            stderr=subprocess.DEVNULL
+        ).decode().strip().splitlines()
+
+        with lock:
+            results.extend(output)
+
+    except Exception as e:
+        print(f"[-] Subfinder error: {e}")
+
+def run_amass(domain):
+    try:
+        output = subprocess.check_output(
+            ["amass", "enum", "-passive", "-d", domain],
+            stderr=subprocess.DEVNULL
+        ).decode().strip().splitlines()
+
+        with lock:
+            results.extend(output)
+
+    except Exception as e:
+        print(f"[-] Amass error: {e}")
+
+def run_orchestrator(domain):
+    print(f"[*] Starting parallel discovery for: {domain}")
+
+    # run both tools at the same time
+    t1 = threading.Thread(target=run_subfinder, args=(domain,))
+    t2 = threading.Thread(target=run_amass, args=(domain,))
+
+    t1.start()
+    t2.start()
+
+    t1.join()
+    t2.join()
+
+    # deduplicate
+    unique = list(set(results))
+    print(f"[+] Discovered {len(unique)} unique subdomains")
+
+    # save to file
+    with open("data/subdomains_raw.txt", "w") as f:
+        for sub in sorted(unique):
+            f.write(sub + "\n")
+
+    print("[*] Saved → data/subdomains_raw.txt")
+    return unique
