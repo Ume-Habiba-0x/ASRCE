@@ -9,7 +9,7 @@ def run_dnsx(input_file="data/subdomains_clean.txt",
     try:
         result = subprocess.check_output(
             ["dnsx", "-l", input_file, "-json", "-silent",
-             "-a", "-cname", "-resp"],
+             "-a", "-cname", "-resp" , "-t", "100"],
             stderr=subprocess.DEVNULL
         ).decode().strip()
 
@@ -40,7 +40,7 @@ def run_httpx(input_file="data/subdomains_clean.txt",
         result = subprocess.check_output(
             ["httpx", "-l", input_file, "-json", "-silent",
              "-status-code", "-title", "-tech-detect",
-             "-cdn", "-tls-grab"],
+             "-cdn", "-tls-grab" , "-t", "100"],
             stderr=subprocess.DEVNULL
         ).decode().strip()
 
