@@ -1,3 +1,4 @@
+import re
 import argparse
 from colorama import Fore, init
 from modules.orchestrator import run_orchestrator
@@ -16,8 +17,11 @@ def banner():
    ██║  ██║███████║██║  ██║╚██████╗███████╗
    ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝ ╚═════╝╚══════╝
         Attack Surface Recon & Classification Engine
-        
     """)
+
+def is_valid_domain(domain):
+    pattern = r"^(?!-)[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*\.[A-Za-z]{2,}$"
+    return re.match(pattern, domain)
 
 def parse_args():
     parser = argparse.ArgumentParser(
@@ -42,11 +46,13 @@ if __name__ == "__main__":
             print(Fore.RED + "[-] Provide a domain with -d or use --report-only")
             exit(1)
 
-        print(Fore.BLUE + f"[*] Target: {args.domain}")
+        if not is_valid_domain(args.domain):
+            print(Fore.RED + f"[-] Invalid domain: {args.domain}")
+            exit(1)
 
+        print(Fore.BLUE + f"[*] Target: {args.domain}")
         run_orchestrator(args.domain)
         run_normalizer()
         run_enricher()
         run_risk_scorer(output_file=f"output/report_{args.domain}.json")
-
         print(Fore.GREEN + f"\n[+] Pipeline complete. Report saved → output/report_{args.domain}.json")
