@@ -1,0 +1,4 @@
+cat > requirements.txt << EOF
+colorama>=0.4.6
+requests>=2.31.0
+EOF
