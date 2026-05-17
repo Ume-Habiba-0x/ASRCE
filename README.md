@@ -1,4 +1,3 @@
-```markdown
 # ASRCE — Attack Surface Recon & Classification Engine
 
 > Automated subdomain discovery, enrichment, and risk classification pipeline.
@@ -179,6 +178,3 @@ ASRCE/
 - [Architecture](docs/architecture.md) — pipeline design and module breakdown
 - [Design Decisions](docs/decisions.md) — why each decision was made
 - [Edge Cases](docs/edge_cases.md) — what breaks naive tools and how ASRCE handles it
-```
-
- 
