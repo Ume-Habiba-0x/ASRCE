@@ -19,6 +19,7 @@ Target Domain
 [4] Risk Scorer    — modules/risk_scorer.py
      ↓
 [5] JSON Report    — output/report_<domain>.json
+
 ```
 
 ## Module Breakdown
@@ -63,6 +64,7 @@ subdomains_clean.txt
 dns_results.json + http_results.json
        ↓
 report_<domain>.json
+
 ```
 
 ## Design Principles
