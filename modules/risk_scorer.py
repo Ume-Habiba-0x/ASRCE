@@ -1,6 +1,6 @@
 """
 ASRCE — Attack Surface Recon Classification Engine
-Version 2.0
+Version 1.0
 Author: Ume-Habiba
 """
 
@@ -296,12 +296,12 @@ def run_risk_scorer(
             low.append(result)
 
     print_summary(critical, high, medium, low)
-    print(f"{Color.CYAN}  Full report → output/report.json{Color.RESET}\n")
+    print(f"{Color.CYAN}  Full report → {output_file}{Color.RESET}\n")
 
     report = {
         "meta": {
-            "tool"        : "ASRCE v2.0",
-            "author"      : "tales_from_terminal",
+            "tool"        : "ASRCE v1.0",
+            "author"      : "Ume-Habiba",
             "generated_at": datetime.now(timezone.utc).isoformat(),
         },
         "summary": {
