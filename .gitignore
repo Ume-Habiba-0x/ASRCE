@@ -1,8 +1,10 @@
 cat > .gitignore << EOF
-output/*.txt
 output/*.json
+output/*.txt
 data/subdomains_raw.txt
-data/bruteforce_subdomain.txt
+data/subdomains_clean.txt
+data/dns_results.json
+data/http_results.json
 __pycache__/
 *.pyc
 .env
