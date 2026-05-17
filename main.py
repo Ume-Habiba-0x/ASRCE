@@ -16,7 +16,7 @@ def banner():
    ██║  ██║███████║██║  ██║╚██████╗███████╗
    ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝ ╚═════╝╚══════╝
         Attack Surface Recon & Classification Engine
-        tales_from_terminal
+        
     """)
 
 def parse_args():
