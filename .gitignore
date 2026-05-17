@@ -6,6 +6,7 @@ data/subdomains_clean.txt
 data/dns_results.json
 data/http_results.json
 __pycache__/
+**/__pycache__/
 *.pyc
 .env
 EOF
