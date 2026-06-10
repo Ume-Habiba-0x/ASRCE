@@ -300,7 +300,7 @@ Legal practice targets: `vulnweb.com`, `scanme.nmap.org`, HackTheBox machines, y
 
 ## Author
 
-Built by **[Ume Habiba](https://github.com/Ume-Habiba-0x)** — Offensive Security Practitioner, Security Researcher,Security Engineering
+Built by **[Ume Habiba](https://github.com/Ume-Habiba-0x)** — Offensive Security Practitioner, Security Researcher
 
 ---
 
