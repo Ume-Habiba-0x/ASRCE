@@ -1,49 +1,64 @@
 import re
+import logging
+from collections import defaultdict
+
+logger = logging.getLogger("asrce.normalizer")
 
 def is_valid_domain(domain):
-    # regex checks it looks like a real domain
-    pattern = r"^(?!-)[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*\.[A-Za-z]{2,}$"
-    return re.match(pattern, domain)
+    if not domain or len(domain) > 253:
+        return False
+    if domain.startswith(".") or domain.endswith("."):
+        return False
+    labels = domain.split(".")
+    if len(labels) < 2:
+        return False
+    tld = labels[-1].lower()
+    if len(tld) < 2 or not tld.isalpha():
+        return False
+    for label in labels[:-1]:
+        if not label or len(label) > 63:
+            return False
+        if label.startswith("-") or label.endswith("-"):
+            return False
+        if not re.match(r"^[A-Za-z0-9-]+$", label):
+            return False
+        if "--" in label and not label.startswith("xn--"):
+            return False
+    return True
 
 def detect_wildcard(subdomains):
-    # if many subdomains share same IP its a wildcard — noise
-    # for now flag it as a warning, full IP check comes in enricher
-    seen = {}
+    base_counts = defaultdict(int)
     for sub in subdomains:
-        base = ".".join(sub.split(".")[-2:])
-        seen[base] = seen.get(base, 0) + 1
-    
-    for base, count in seen.items():
+        parts = sub.split(".")
+        if len(parts) >= 3:
+            base = ".".join(parts[-3:])
+        else:
+            base = ".".join(parts[-2:])
+        base_counts[base] += 1
+
+    warnings = []
+    for base, count in base_counts.items():
         if count > 50:
-            print(f"[!] Possible wildcard DNS detected for {base} — {count} subdomains")
+            msg = f"Possible wildcard DNS for {base} — {count} subdomains"
+            warnings.append(msg)
+            logger.warning(msg)
+    return warnings
 
-def run_normalizer(input_file="data/subdomains_raw.txt", 
-                   output_file="data/subdomains_clean.txt"):
-    
-    print("[*] Starting normalization...")
+def run_normalizer(subdomains_dict, config):
+    logger.info("Starting normalization...")
 
-    try:
-        with open(input_file, "r") as f:
-            raw = f.read().splitlines()
-    except FileNotFoundError:
-        print("[-] No input file found. Run orchestrator first.")
-        return []
+    if not subdomains_dict:
+        logger.warning("No subdomains to normalize")
+        return {}
 
-    # deduplicate
-    unique = list(set(raw))
-    
-    # validate each domain
-    valid = [d.strip().lower() for d in unique if is_valid_domain(d.strip())]
-    
-    # wildcard check
-    detect_wildcard(valid)
+    valid = {}
+    for domain, meta in subdomains_dict.items():
+        if is_valid_domain(domain):
+            valid[domain] = meta
+        else:
+            logger.debug(f"Filtered invalid domain: {domain}")
 
-    # save
-    with open(output_file, "w") as f:
-        for sub in sorted(valid):
-            f.write(sub + "\n")
+    detect_wildcard(list(valid.keys()))
 
-    print(f"[+] {len(raw)} raw → {len(valid)} clean subdomains")
-    print(f"[*] Saved → {output_file}")
-    
+    logger.info(f"Normalization: {len(subdomains_dict)} raw → {len(valid)} clean")
     return valid

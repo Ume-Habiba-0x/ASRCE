@@ -1,12 +1,13 @@
 """
 ASRCE — Attack Surface Recon Classification Engine
-Version 1.0
+Version 2.0
 Author: Ume-Habiba
 """
 
 import json
 import os
 from datetime import datetime, timezone
+from modules.html_reporter import generate_html_report
 
 HIGH_RISK_KEYWORDS = [
     "dev", "staging", "stg", "admin", "backup", "test",
@@ -29,7 +30,42 @@ REAL_CDN_PROVIDERS = [
     "akamai.net", "incapdns.net"
 ]
 
+WAF_HEADERS = {
+    "cloudflare": ["cf-ray", "cf-cache-status", "cf-request-id"],
+    "akamai": ["x-akamai-transformed", "akamai-cache-status"],
+    "aws": ["x-amz-cf-id", "x-amz-cf-pop"],
+    "incapsula": ["x-iinfo", "incap-visid"],
+    "sucuri": ["x-sucuri-id"],
+    "fastly": ["x-fastly-request-id"],
+    "barracuda": ["x-barracuda"],
+    "f5": ["x-waf-event-info", "x-waf-status"],
+}
+
 CERT_EXPIRY_WARNING_DAYS = 30
+
+
+def _is_cloudflare_ip(ip):
+    """Check if IP belongs to Cloudflare's anycast IPv4 ranges."""
+    try:
+        parts = ip.split(".")
+        if len(parts) != 4:
+            return False
+        first = int(parts[0])
+        second = int(parts[1])
+        third = int(parts[2])
+
+        # 104.16.0.0/12  → 104.16.x.x – 104.31.x.x
+        if first == 104 and 16 <= second <= 31:
+            return True
+        # 172.64.0.0/13  → 172.64.x.x – 172.71.x.x
+        if first == 172 and 64 <= second <= 71:
+            return True
+        # 131.0.72.0/22  → 131.0.72.x – 131.0.75.x
+        if first == 131 and second == 0 and 72 <= third <= 75:
+            return True
+    except (ValueError, IndexError):
+        pass
+    return False
 
 
 def has_high_keyword(host):
@@ -50,18 +86,50 @@ def is_potential_takeover(record):
 
 
 def is_direct_ip(record):
-    has_a     = bool(record.get("a"))
+    has_a = bool(record.get("a"))
     has_cname = bool(record.get("cname"))
-    return has_a and not has_cname
+    behind_cdn = is_behind_real_cdn(record)
+    return has_a and not has_cname and not behind_cdn
 
 
 def is_behind_real_cdn(record):
+    # 1. Check CNAME strings
     cnames = record.get("cname", [])
     for cname in cnames:
         for cdn in REAL_CDN_PROVIDERS:
             if cdn in cname.lower():
                 return True
+    
+    # 2. Check webserver field
+    webserver = record.get("webserver", "").lower()
+    if "cloudflare" in webserver or "fastly" in webserver or "akamai" in webserver:
+        return True
+    
+    # 3. Check httpx CDN field
+    cdn_field = record.get("cdn", "")
+    if cdn_field and isinstance(cdn_field, str):
+        if any(x in cdn_field.lower() for x in ["cloudflare", "fastly", "akamai", "cloudfront", "incapsula"]):
+            return True
+    
+    # 4. Check IP addresses against known CDN ranges
+    ips = record.get("a", record.get("ip", []))
+    for ip in ips:
+        if _is_cloudflare_ip(ip):
+            return True
+    
     return False
+
+
+def detect_waf_from_headers(record):
+    headers = record.get("headers", {})
+    if not headers:
+        return None
+    headers_lower = {k.lower(): v for k, v in headers.items()}
+    for waf_name, signatures in WAF_HEADERS.items():
+        for sig in signatures:
+            if sig.lower() in headers_lower:
+                return waf_name
+    return None
 
 
 def analyze_tls(record):
@@ -75,7 +143,7 @@ def analyze_tls(record):
     if not_after and not tls.get("expired"):
         try:
             expiry_date = datetime.fromisoformat(not_after.replace("Z", "+00:00"))
-            days_left   = (expiry_date - datetime.now(timezone.utc)).days
+            days_left = (expiry_date - datetime.now(timezone.utc)).days
             if days_left < 0:
                 findings.append(("CRITICAL", f"Certificate expired {abs(days_left)} days ago"))
             elif days_left <= CERT_EXPIRY_WARNING_DAYS:
@@ -116,17 +184,17 @@ def analyze_http(record):
 
 
 def classify(record):
-    host   = record.get("host", "unknown")
+    host = record.get("host", "unknown")
     status = record.get("status", record.get("status_code", ""))
 
     if status == "NXDOMAIN" or record.get("failed"):
         return None
 
-    all_findings  = analyze_tls(record) + analyze_tech_stack(record) + analyze_http(record)
-    info_notes    = [r for s, r in all_findings if s == "INFO"]
+    all_findings = analyze_tls(record) + analyze_tech_stack(record) + analyze_http(record)
+    info_notes = [r for s, r in all_findings if s == "INFO"]
     risk_findings = [(s, r) for s, r in all_findings if s != "INFO"]
 
-    risk    = "LOW"
+    risk = "LOW"
     reasons = []
 
     takeover, service = is_potential_takeover(record)
@@ -158,7 +226,7 @@ def classify(record):
             risk = "MEDIUM"
             reasons.append(f"Sensitive keyword '{keyword}' — behind CDN")
 
-    has_cname       = bool(record.get("cname"))
+    has_cname = bool(record.get("cname"))
     behind_real_cdn = is_behind_real_cdn(record)
 
     if risk == "LOW" and has_cname and not behind_real_cdn:
@@ -170,22 +238,37 @@ def classify(record):
         reasons.append("No significant issues detected")
 
     result = {
-        "host"     : host,
-        "ip"       : record.get("a", record.get("ip", [])),
-        "cname"    : record.get("cname", []),
-        "status"   : status,
+        "host": host,
+        "ip": record.get("a", record.get("ip", [])),
+        "cname": record.get("cname", []),
+        "status": status,
         "webserver": record.get("webserver", "unknown"),
-        "risk"     : risk,
-        "reasons"  : reasons,
+        "risk": risk,
+        "reasons": reasons,
     }
+
+    sources = record.get("sources", [])
+    confidence = record.get("confidence", 1)
+    if sources:
+        result["sources"] = sources
+        result["confidence"] = confidence
+        result["confidence_label"] = {1: "LOW", 2: "MEDIUM", 3: "HIGH"}.get(
+            min(confidence, 3), "HIGH"
+        )
+
+    waf = record.get("waf")
+    if not waf:
+        waf = detect_waf_from_headers(record)
+    if waf:
+        result["waf"] = waf
 
     tls = record.get("tls", {})
     if tls:
         result["tls_summary"] = {
-            "version"  : tls.get("tls_version", "unknown"),
-            "expired"  : tls.get("expired", False),
+            "version": tls.get("tls_version", "unknown"),
+            "expired": tls.get("expired", False),
             "not_after": tls.get("not_after", "unknown"),
-            "issuer"   : tls.get("issuer_cn", "unknown"),
+            "issuer": tls.get("issuer_cn", "unknown"),
         }
     if info_notes:
         result["notes"] = info_notes
@@ -194,17 +277,17 @@ def classify(record):
 
 
 class Color:
-    RED     = "\033[91m"
-    ORANGE  = "\033[93m"
-    YELLOW  = "\033[33m"
-    GREEN   = "\033[92m"
-    CYAN    = "\033[96m"
-    GRAY    = "\033[90m"
-    BOLD    = "\033[1m"
-    RESET   = "\033[0m"
+    RED = "\033[91m"
+    ORANGE = "\033[93m"
+    YELLOW = "\033[33m"
+    GREEN = "\033[92m"
+    CYAN = "\033[96m"
+    GRAY = "\033[90m"
+    BOLD = "\033[1m"
+    RESET = "\033[0m"
 
 RISK_COLORS = {"CRITICAL": Color.RED, "HIGH": Color.ORANGE, "MEDIUM": Color.YELLOW, "LOW": Color.GREEN}
-RISK_ICONS  = {"CRITICAL": "💀", "HIGH": "🔴", "MEDIUM": "🟡", "LOW": "🟢"}
+RISK_ICONS = {"CRITICAL": "💀", "HIGH": "🔴", "MEDIUM": "🟡", "LOW": "🟢"}
 
 
 def print_summary(critical, high, medium, low):
@@ -220,12 +303,18 @@ def print_summary(critical, high, medium, low):
 
 
 def print_finding(result):
-    risk  = result["risk"]
+    risk = result["risk"]
     color = RISK_COLORS.get(risk, Color.RESET)
-    icon  = RISK_ICONS.get(risk, "•")
-    tls   = result.get("tls_summary", {})
+    icon = RISK_ICONS.get(risk, "•")
+    tls = result.get("tls_summary", {})
 
     print(f"  {color}{Color.BOLD}{icon} [{risk}] {result['host']}{Color.RESET}")
+
+    sources = result.get("sources", [])
+    confidence_label = result.get("confidence_label", "")
+    if sources:
+        print(f"  {Color.GRAY}  Sources: {', '.join(sources)} | Confidence: {confidence_label}{Color.RESET}")
+
     print(f"  {Color.GRAY}{'·'*52}{Color.RESET}")
     print(f"  {Color.CYAN}  IP      :{Color.RESET} {', '.join(result.get('ip', [])) or 'unknown'}")
     print(f"  {Color.CYAN}  CNAME   :{Color.RESET} {', '.join(result.get('cname', [])) or 'none'}")
@@ -236,6 +325,9 @@ def print_finding(result):
         expired_tag = f"{Color.RED} ⚠ EXPIRED{Color.RESET}" if tls.get("expired") else ""
         print(f"  {Color.CYAN}  TLS     :{Color.RESET} {tls.get('version','?').upper()} | "
               f"Expires: {str(tls.get('not_after','?'))[:10]}{expired_tag}")
+
+    if result.get("waf"):
+        print(f"  {Color.CYAN}  WAF     :{Color.RESET} {result['waf']}")
 
     print(f"  {Color.CYAN}  Reasons :{Color.RESET}")
     for r in result["reasons"]:
@@ -257,29 +349,36 @@ def print_section(title, findings, color):
 
 
 def run_risk_scorer(
-    input_file  = "data/dns_results.json",
-    http_file   = "data/http_results.json",
-    output_file = "output/report.json"
+    enriched_data=None,
+    input_file=None,
+    http_file=None,
+    output_json="output/report.json",
+    output_html=None,
+    domain=None  # <-- FIXED: accept explicit domain
 ):
-    try:
-        with open(input_file, "r") as f:
-            dns_records = json.load(f)
-    except FileNotFoundError:
-        dns_records = []
+    records = []
 
-    try:
-        with open(http_file, "r") as f:
-            http_records = json.load(f)
-    except FileNotFoundError:
-        http_records = []
+    if enriched_data is not None:
+        records = enriched_data
+    else:
+        try:
+            with open(input_file or "data/dns_results.json", "r") as f:
+                dns_records = json.load(f)
+        except FileNotFoundError:
+            dns_records = []
 
-    http_map = {r.get("host", r.get("input", "")): r for r in http_records}
-    for record in dns_records:
-        host = record.get("host", "")
-        if host in http_map:
-            record.update(http_map[host])
+        try:
+            with open(http_file or "data/http_results.json", "r") as f:
+                http_records = json.load(f)
+        except FileNotFoundError:
+            http_records = []
 
-    records = dns_records
+        http_map = {r.get("host", r.get("input", "")): r for r in http_records}
+        for record in dns_records:
+            host = record.get("host", "")
+            if host in http_map:
+                record.update(http_map[host])
+        records = dns_records
 
     critical, high, medium, low = [], [], [], []
     for record in records:
@@ -296,29 +395,45 @@ def run_risk_scorer(
             low.append(result)
 
     print_summary(critical, high, medium, low)
-    print(f"{Color.CYAN}  Full report → {output_file}{Color.RESET}\n")
+    print(f"{Color.CYAN}  Full report → {output_json}{Color.RESET}\n")
+
+    # ── FIXED DOMAIN EXTRACTION ──
+    if domain:
+        report_domain = domain
+    elif output_json:
+        basename = os.path.basename(output_json)  # report_umt.edu.pk.json
+        basename = basename.replace("report_", "").replace(".json", "")
+        report_domain = basename if basename else "unknown"
+    else:
+        report_domain = records[0].get("host", "unknown") if records else "unknown"
 
     report = {
         "meta": {
-            "tool"        : "ASRCE v1.0",
-            "author"      : "Ume-Habiba",
+            "tool": "ASRCE v2.0",
+            "author": "Ume-Habiba",
             "generated_at": datetime.now(timezone.utc).isoformat(),
+            "domain": report_domain,
         },
         "summary": {
-            "total"   : len(critical)+len(high)+len(medium)+len(low),
+            "total": len(critical) + len(high) + len(medium) + len(low),
             "critical": len(critical),
-            "high"    : len(high),
-            "medium"  : len(medium),
-            "low"     : len(low)
+            "high": len(high),
+            "medium": len(medium),
+            "low": len(low)
         },
         "critical": critical,
-        "high"    : high,
-        "medium"  : medium,
-        "low"     : low,
+        "high": high,
+        "medium": medium,
+        "low": low,
     }
 
-    os.makedirs(os.path.dirname(output_file), exist_ok=True)
-    with open(output_file, "w") as f:
+    os.makedirs(os.path.dirname(output_json) or ".", exist_ok=True)
+    with open(output_json, "w") as f:
         json.dump(report, f, indent=2)
 
-    print(f"{Color.GREEN}[+] Report saved → {output_file}{Color.RESET}\n")
+    print(f"{Color.GREEN}[+] JSON report saved → {output_json}{Color.RESET}")
+
+    if output_html:
+        generate_html_report(report, output_html)
+        print(f"{Color.GREEN}[+] HTML report saved → {output_html}{Color.RESET}")
+    print()
