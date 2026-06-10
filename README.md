@@ -137,26 +137,24 @@ Target Domain
 | **HIGH** | Direct IP exposure no CDN or WAF; sensitive keyword without CDN; weak TLS 1.0/1.1; cert expires within 30 days |
 | **MEDIUM** | Sensitive keyword behind CDN; outdated tech (IIS 6–8, ASP.NET 3.x–4.0); TLS 1.2; internal CNAME alias; HTTP 500/502/503 |
 | **LOW** | Live host behind real CDN with TLS 1.3, no significant issues |
-
 ---
 
-## Installation
+## Quick Start
 
-### Prerequisites
+```bash
+# Clone
+git clone https://github.com/Ume-Habiba-0x/ASRCE.git
+cd ASRCE
 
-```
-# Go toolchain
+# Install Go toolchain if not already installed
 sudo apt install golang-go -y
 
 # Python dependencies
 python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
-```
 
-### External Binaries
-
-```
+# Go tools
 go install -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest
 go install -v github.com/projectdiscovery/httpx/cmd/httpx@latest
 go install -v github.com/projectdiscovery/dnsx/cmd/dnsx@latest
@@ -166,13 +164,16 @@ pip install wafw00f
 echo 'export PATH=$PATH:$(go env GOPATH)/bin' >> ~/.bashrc
 echo 'export GO_BIN=$(go env GOPATH)/bin' >> ~/.bashrc
 source ~/.bashrc
+
+# Run
+python3 main.py -d target.com
 ```
 
 ---
 
 ## Usage
 
-```
+```bash
 # Full scan
 python3 main.py -d target.com
 
