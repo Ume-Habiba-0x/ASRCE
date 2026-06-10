@@ -9,4 +9,9 @@ __pycache__/
 **/__pycache__/
 *.pyc
 .env
-EOF
+EOFoutput/*.html
+output/*.json
+data/logs/
+data/httpx_input.txt
+data/last_enrichment.json
+data/resolvers.txt
